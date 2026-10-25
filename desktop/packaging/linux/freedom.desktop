@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Freedom
+GenericName=Video and audio downloader
+GenericName[it]=Downloader di video e audio
+Comment=Download video, audio or both from YouTube, SoundCloud, Vimeo, Twitch, Bandcamp and 1800 more sites
+Comment[it]=Scarica video, audio o entrambi da YouTube, SoundCloud, Vimeo, Twitch, Bandcamp e altri 1800 siti
+Exec=freedom %U
+Icon=freedom
+Terminal=false
+Categories=AudioVideo;Network;FileTransfer;Qt;
+Keywords=youtube;yt-dlp;download;video;audio;mp3;playlist;
+StartupWMClass=freedom

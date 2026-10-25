@@ -1,0 +1,58 @@
+name: build
+
+on:
+  push:
+    branches: [main, master]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults: { run: { working-directory: desktop } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: choco install innosetup -y --no-progress
+      - run: powershell -ExecutionPolicy Bypass -File packaging\windows\build.ps1
+      - uses: actions/upload-artifact@v4
+        with: { name: windows, path: desktop/dist/*-setup.exe }
+
+  linux:
+    # 22.04: la glibc più vecchia ancora supportata, così il .deb gira anche su 24.04.
+    runs-on: ubuntu-22.04
+    defaults: { run: { working-directory: desktop } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg libegl1 libxkbcommon-x11-0 libxcb-cursor0
+      - run: QT_QPA_PLATFORM=offscreen PYTHON=python bash packaging/linux/build_deb.sh
+      - uses: actions/upload-artifact@v4
+        with: { name: linux, path: "desktop/dist/*.deb\ndesktop/dist/*.tar.gz" }
+
+  android:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: android } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: "17" }
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x gradlew && ./gradlew --no-daemon testDebugUnitTest assembleRelease
+      - run: cp app/build/outputs/apk/release/app-universal-release.apk freedom.apk
+      - uses: actions/upload-artifact@v4
+        with: { name: android, path: android/freedom.apk }
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [windows, linux, android]
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: out, merge-multiple: true }
+      - uses: softprops/action-gh-release@v2
+        with: { files: "out/*" }

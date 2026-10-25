@@ -1,0 +1,26 @@
+# Python / desktop
+__pycache__/
+*.pyc
+.venv/
+.venv-win/
+.pytest_cache/
+desktop/build/
+desktop/dist/
+desktop/vendor/
+*.egg-info/
+
+# Android
+*.iml
+.gradle/
+local.properties
+.idea/
+android/build/
+android/app/build/
+.kotlin/
+.cxx/
+*.keystore
+*.jks
+keystore.properties
+
+.DS_Store
+*:Zone.Identifier

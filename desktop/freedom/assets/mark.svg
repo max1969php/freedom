@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <!-- Cerchio spezzato in alto: la freccia di download entra, lo attraversa ed esce sotto. -->
+  <g fill="none" stroke="#FF2B2B" stroke-width="8" stroke-linecap="square">
+    <path d="M38 22 A34 34 0 1 0 70 22"/>
+    <path d="M54 4 L54 96"/>
+    <path d="M34 76 L54 96 L74 76"/>
+  </g>
+</svg>

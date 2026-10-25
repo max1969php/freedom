@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.freedom</id>
+  <name>Freedom</name>
+  <summary>Download video, audio or both from 1800 sites</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <launchable type="desktop-id">freedom.desktop</launchable>
+  <description>
+    <p>A yt-dlp front end: YouTube, Vimeo, Twitch, TikTok, SoundCloud, Bandcamp, Mixcloud, Internet Archive and many more. Single items or whole playlists, albums and channels.</p>
+  </description>
+  <url type="homepage">https://github.com/max1969php/freedom</url>
+  <releases><release version="1.0.0" date="2026-10-25"/></releases>
+</component>

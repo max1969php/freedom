@@ -1,0 +1,24 @@
+[project]
+name = "freedom"
+version = "1.0.0"
+description = "Scarica video, audio o entrambi da YouTube, SoundCloud, Vimeo, Twitch, Bandcamp e altri 1800 siti (yt-dlp)"
+requires-python = ">=3.10"
+license = { text = "GPL-3.0-or-later" }
+dependencies = ["yt-dlp[default]>=2025.1.1", "PySide6-Essentials>=6.6"]
+
+[project.optional-dependencies]
+build = ["pyinstaller>=6.6"]
+test = ["pytest>=8"]
+
+[project.gui-scripts]
+freedom = "freedom.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["freedom*"]
+
+[tool.setuptools.package-data]
+freedom = ["assets/*"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
